@@ -1,4 +1,4 @@
-// game stratego
+
 function createBoard(rows, initialValue = null) {
   let board = [];
   for (let i = 0; i < rows; i++) {
@@ -68,5 +68,6 @@ printBoard(board)
 
 export function soldierInBoard(board,soldier,row,col){
     board[row][col] = soldier
+
 
 }
