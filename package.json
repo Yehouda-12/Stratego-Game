@@ -1,0 +1,25 @@
+{
+  "dependencies": {
+    "analiza-sync": "^1.0.1"
+  },
+  "name": "stratego-game",
+  "version": "1.0.0",
+  "description": "",
+  "main": "movements.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Yehouda-12/Stratego-Game.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/Yehouda-12/Stratego-Game/issues"
+  },
+  "homepage": "https://github.com/Yehouda-12/Stratego-Game#readme"
+}
