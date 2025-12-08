@@ -1,7 +1,7 @@
 
 
 
-function createBoard(rows, initialValue = null) {
+export function createBoard(rows, initialValue = null) {
   let board = [];
   for (let i = 0; i < rows; i++) {
     let row = [];
