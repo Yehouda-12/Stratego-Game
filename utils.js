@@ -1,7 +1,7 @@
 
 
 
-function createBoard(rows, initialValue = null) {
+export function createBoard(rows, initialValue = null) {
   let board = [];
   for (let i = 0; i < rows; i++) {
     let row = [];
@@ -49,12 +49,12 @@ export function playerInBoard(player, board, row, col) {
   return board;
 }
 
-export function initGame() {
+export function initGame(name) {
   let board = createBoard(10);
   let soldiers = soldiersPc();
   let boardSoldiers = soldiersInBoard(board, soldiers);
   let puflag = flagInBoard(createFlag(), board, 0, 9);
-  let player = createPlayer("Yehouda");
+  let player = createPlayer(name);
   let putPlayer = playerInBoard(player, board, 9, 5);
 
   return board
@@ -64,8 +64,6 @@ export function printBoard(board){
     console.log(JSON.stringify(board).replaceAll(',[', '\n[').replace('[[', '[\n[').replace(']]', ']\n]'));
 
 }
-let board = initGame()
-printBoard(board)
 
 
 export function soldierInBoard(board,soldier,row,col){
