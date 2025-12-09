@@ -6,13 +6,13 @@ function checkTile(board, row, col) {
 }
 function move(board, player, row, col) {
     let beforeMove = [player.row, player.col]
-    if (checkTile(board, row, col) === 0) {
+    if (checkTile(board, row, col) === null) {
         [player.row, player.col] = [row, col]
         board[row][col] = player
         board[beforeMove[0]][beforeMove[1]] = null
-        } else {
-            battel()
-        }
+    } else {
+        battel()
+    }
     return board
 
 }
@@ -34,8 +34,7 @@ function getPossibleMoves(board, player) {
             newRow < board.length &&
             newCol >= 0 &&
             newCol < board[0].length) {
-            possibleMoves
-            [dir] = delta;
+            possibleMoves [dir] = delta;
         }
     }
 
@@ -44,3 +43,18 @@ function getPossibleMoves(board, player) {
 
 
 
+let board = [
+    [null, null, null],
+    [null, null, null],
+    [null, null, null]
+];
+
+const player = {
+    type: "soldierPC",
+    rank: 5,
+    row: 1,
+    col: 1
+}
+
+const direc = getPossibleMoves(board, player)
+console.log(move(board, player, direc["up"].r, direc["up"].c))
