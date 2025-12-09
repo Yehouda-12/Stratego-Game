@@ -40,4 +40,46 @@ function getPossibleMoves(board, player) {
 
     return possibleMoves;
 }
+export function updatePosition(possiblesMoves, player, dir) {
+  const delta = possiblesMoves[dir];
+  const update = []
+  
+  
+  if (delta) {
+    const newRow = player.row + delta.r;
+    
+    update.push(newRow)
+    
+    const newCol = player.col + delta.c;
+    
+    update.push(newCol)
+    
+  }
+  return update
+}
 
+
+export function battle(board, player, fromRow, fromCol) {
+  let tile = board[fromRow][fromCol];
+
+  if (tile.type.includes("flag")) {
+    console.log(`${player.type} found the flag!`);
+  } else if (tile.type.includes("soldier")) {
+    if (tile.rank > player.rank) {
+      console.log(
+        `${player.type} lost the battle against grade ${tile.rank} soldier!`
+      );
+      board[player.row][player.col] = null;
+    } else if (tile.rank === player.rank) {
+      console.log("two lose");
+      board[player.row][player.col] = null;
+      board[fromRow][fromCol] = null;
+    } else {
+      console.log(
+        `${player.type} won the battle against grade ${tile.rank} soldier!`
+      );
+      board[fromRow][fromCol] = player;
+      board[player.row][player.col] = null;
+    }
+  }
+}
