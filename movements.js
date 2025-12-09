@@ -4,6 +4,7 @@ function error() {
 
 function checkTile(board, row, col) {
     return board[row][col]
+}
 
 function move(board, player, row, col) {
     let beforeMove = [player.row, player.col]
