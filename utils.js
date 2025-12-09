@@ -10,10 +10,10 @@ export function createBoard(rows, initialValue = null) {
   return board;
 }
 
-export function soldiers(array,type,grade,num) {
+export function soldiers(array,type,rank,num) {
   
   for (let i = 1; i <= num ; i++) {
-    let soldier = { type: type, grade: grade };
+    let soldier = { type: type, rank: rank };
     array.push(soldier);
   }
   
@@ -57,7 +57,9 @@ export function soldiersInBoard(board, soldiers, startRow) {
       if (board[row][col] === null && rowCounts[row] < 10) {
         board[row][col] = soldiers[i];
         rowCounts[row]++; 
-        placed = true;
+        placed = true
+        soldiers[i].row = row
+        soldiers[i].col = col;
       }
     }
   }
@@ -69,23 +71,10 @@ export function createFlag(array,type) {
   array.push({type: type })
   
 }
-// export function flagInBoard(flag, board, row, col) {
-//   board[row][col] = flag;
-//   return board;
-// }
 
-// export function createPlayer(name, row, col) {
-//   return { type: "player", name: name, row: row, col: col };
-// }
 
-// export function playerInBoard(board, player) {
-//   board[player.row][player.col] = player;
-//   return board;
-// }
 
-// export function soldierInBoard(board, soldier, row, col) {
-//   board[row][col] = soldier;
-// }
+
 
 export function printBoard(board) {
   let display = board
@@ -94,7 +83,7 @@ export function printBoard(board) {
         .map((cell) => {
           if (!cell) return ".";
           if (cell.type === "soldierPc" || cell.type === 'flagPc') return "X";
-          // if (cell.type === "flag") return "F";
+          
           if (cell.type === "soldierPlayer" || cell.type === 'flagPlayer') return "O";
           
         })
@@ -104,98 +93,4 @@ export function printBoard(board) {
 
   console.log(display);
 }
-function getPossibleMoves(matrix, player) {
-  const moves = [];
-
-  const directions = {
-    up: { r: -1, c: 0 },
-    down: { r: 1, c: 0 },
-    left: { r: 0, c: -1 },
-    right: { r: 0, c: 1 },
-  };
-
-  for (const [dir, delta] of Object.entries(directions)) {
-    const newRow = player.row + delta.r;
-    const newCol = player.col + delta.c;
-
-    if (
-      newRow >= 0 &&
-      newRow < matrix.length &&
-      newCol >= 0 &&
-      newCol < matrix[0].length
-    ) {
-      moves.push(dir);
-    }
-  }
-
-  return moves;
-}
-export function movePlayer(board, player, dir) {
-  const directions = {
-    up: { r: -1, c: 0 },
-    down: { r: 1, c: 0 },
-    left: { r: 0, c: -1 },
-    right: { r: 0, c: 1 },
-  };
-  if (directions[dir]) {
-    board[player.row][player.col] = null;
-    player.row += directions[dir].r;
-    player.col += directions[dir].c;
-  }
-
-  return playerInBoard(board, player);
-}
-
-export function initGame(name) {
-  let board = createBoard(10);
-  let soldiers = soldiersPc();
-  let boardSoldiers = soldiersInBoard(board, soldiers);
-  let puflag = flagInBoard(createFlag(), board, 0, 9);
-
-  return board;
-}
-
-
-
-export function checkCase(board, row, col) {
-  return board[row][col];
-}
-
-
-export function battle(board, player) {
-  let location = checkCase(board, player.row, player.col);
-  if (location !== null) {
-    if (location.type === "flag") {
-      console.log(`${player.name} found the flag!`);
-    } else if (location.type === "soldier") {
-      if (location.grade > 1 && location.grade < 9) {
-        console.log(
-          `${player.name} lost the battle against grade ${location.grade} soldier!`
-        );
-      } else {
-        console.log(
-          `${player.name} won the battle against grade ${location.grade} soldier!`
-        );
-        board[player.row][player.col] = player;
-      }
-    }
-  }
-}
-
-
-
-let soldiersPC =  createSoldiers('soldierPc')
-let soldierPlayer = createSoldiers('soldierPlayer')
-createFlag(soldiersPC,'flagPc')
-createFlag(soldierPlayer,'flagPlayer')
-
-
-let board = createBoard(10)
-board = soldiersInBoard(board,soldierPlayer,0)
-board = soldiersInBoard(board,soldiersPC,6)
-console.log(board);
-printBoard(board)
-
-
-
 
